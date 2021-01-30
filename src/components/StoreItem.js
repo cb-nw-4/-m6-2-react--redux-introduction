@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Button from './Button';
+import { useDispatch } from 'react-redux';
+import { addItem } from './actions';
 
 const StoreItem = ({ id, title, src, price }) => {
+  // console.log(price);
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   }).format(price / 100);
+  const dispatch = useDispatch();
 
   return (
     <Wrapper>
@@ -15,7 +19,10 @@ const StoreItem = ({ id, title, src, price }) => {
         <Image src={src} alt={`${title} sticker`} />
       </ImageWrapper>
       <Title>{title}</Title>
-      <Button>Add to Cart — {formattedPrice}</Button>
+      <Button onClick={() =>
+          dispatch(addItem({ id, title, price }))
+        }
+      >Add to Cart — {formattedPrice}</Button>
     </Wrapper>
   );
 };
