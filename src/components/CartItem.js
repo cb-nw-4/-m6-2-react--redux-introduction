@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {AiOutlineClose} from 'react-icons/ai';
 import UnstyledButton from './UnstyledButton';
-import {removeItem} from "../actions";
+import {removeItem, updateQuantity} from "../actions";
 
 
 const CartItem = ({item}) => {
@@ -28,9 +28,9 @@ const CartItem = ({item}) => {
         <div> 
             Quantity: 
             <Input
-            id="quality" 
-            value={item.quality} 
-            //onChange={(ev) => updateField('creditCard', ev.target.value)}
+            id="quality"
+            value={item.quantity} 
+            onChange={(ev) => dispatch(updateQuantity(item, 'quantity', parseInt(ev.target.value)))}
             
             />  
         </div>

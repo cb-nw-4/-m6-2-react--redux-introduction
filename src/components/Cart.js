@@ -5,6 +5,8 @@ import CartItem from './CartItem';
 import styled from 'styled-components';
 
 import { getStoreItemArray } from "../reducers";
+import {formattedPrice} from "../helpers";
+
 import Button from './Button';
 
 
@@ -28,16 +30,15 @@ const Cart = () => {
 
             {state.map(item => {
 
-                {totalPrice+= item.price}
+                {totalPrice+= item.price * item.quantity}
 
                 return <CartItem key= {item.id} item={item}/> 
-
             }
             )}
 
             <DivFooter>
                 
-                Total: <strong>${totalPrice/100}</strong>    
+                Total: {formattedPrice(totalPrice)} 
 
                 <Button style={{width: '120px'}}>Purchase</Button>
             </DivFooter>    

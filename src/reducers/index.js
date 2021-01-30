@@ -12,20 +12,29 @@ export default function cartReducer(state = initialState, action) {
     switch (action.type) {
 
         case 'ADD_ITEM':{
+
             return{
                 ...state,
                 [action.item.id]:{
                     ...action.item,
-                    quality: 1,
+                    quantity: 1,
                 }
             }
         }
 
         case 'REMOVE_ITEM':{
             return produce(state, (draftState) =>{
-
                 delete draftState[action.item.id]
             })
+        }
+
+        case 'UPDATE_QUANTITY':{
+
+            return produce(state, (draftState) =>{
+                const {item, key, value} = action;
+                draftState[item.id][key]= value;
+            })
+
         }
 
         default:

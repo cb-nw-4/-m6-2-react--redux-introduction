@@ -9,7 +9,7 @@ const ItemGrid = () => {
   return (
     <Wrapper>
       {STORE_ITEMS.map((item) => (
-        <StoreItem key={item.id} {...item} />
+        <StoreItem key={item.id} {...item} item={item} />
       ))}
     </Wrapper>
   );
