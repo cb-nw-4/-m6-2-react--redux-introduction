@@ -4,7 +4,8 @@ import Cart from "./Cart";
 import Logo from "./Logo";
 import ItemGrid from "./ItemGrid";
 import GlobalStyles from "./GlobalStyles";
-
+import Total from './Total'
+import HeaderWrapper from './HeaderWrapper'
 const App = () => {
   return (
     <Wrapper>
@@ -17,7 +18,9 @@ const App = () => {
       </ItemGridWrapper>
 
       <CartWrapper>
+        <HeaderWrapper/>
         <Cart />
+        <Total/>
       </CartWrapper>
     </Wrapper>
   );
@@ -48,6 +51,7 @@ const CartWrapper = styled.div`
   border-left: 3px dashed #ff406e;
   padding-left: 8px;
   background-color: #4B0082;
+  color: white;
   
 `;
 

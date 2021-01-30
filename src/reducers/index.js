@@ -11,6 +11,15 @@ export default function cartReducer(state = initialState, action) {
         }
       }
     }
+    case 'REMOVE_ITEM': {
+      return {
+        ...state,
+        [action.item.id]: {
+          ...action.item,
+          quantity: 1
+        }
+      }
+    }
     default:
       return state;
   }

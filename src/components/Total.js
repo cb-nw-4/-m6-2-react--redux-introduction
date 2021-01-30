@@ -4,11 +4,11 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const Total = () => {
+const Total = ({price}) => {
   return (
     <TotalWrapper>
       <TotalPriceContainer>
-        Total: $12.34
+        Total: ${price}
       </TotalPriceContainer>
       <Button variant="contained" color="secondary">
         Purchase
@@ -23,7 +23,7 @@ const TotalPriceContainer = styled.div`
 `;
 
 const TotalWrapper = styled.div`
-  margin-top: 100%;
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

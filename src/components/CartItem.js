@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 // import InputBase from '@material-ui/core/InputBase'
 
-const CartItem = () => {
+const CartItem = ({name}) => {
   return (
     <ItemWrapper>
       <ItemHeaderWrapper>
-        <p>Hello World</p>
+        <p>{name}</p>
         <p>X</p>
       </ItemHeaderWrapper>
       <QuantityContainer>
