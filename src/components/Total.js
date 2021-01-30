@@ -10,7 +10,7 @@ const Total = () => {
       <TotalPriceContainer>
         Total: $12.34
       </TotalPriceContainer>
-      <Button variant="contained" color="secondary" borderRadius='10px'>
+      <Button variant="contained" color="secondary">
         Purchase
       </Button>
     </TotalWrapper>

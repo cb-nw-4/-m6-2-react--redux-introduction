@@ -2,8 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import CartItem from './CartItem'
 import Total from './Total'
+import {useSelector} from 'react-redux'
+import {getStoreItemArray} from '../reducers/index'
+
 
 const Cart = () => {
+  const state = useSelector(getStoreItemArray)
+  console.log(state)
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -22,7 +27,6 @@ const Wrapper = styled.div`
 `;
 
 const HeaderWrapper = styled.div`
-  /* margin-bottom: 1rem; */
   margin-bottom: 3rem;
 `;
 
