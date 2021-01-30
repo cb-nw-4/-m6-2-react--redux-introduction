@@ -7,13 +7,11 @@ import { getStoreItemArray } from "../reducers/index";
 
 const Cart = () => {
   const state = useSelector(getStoreItemArray);
-  console.log(state);
-
   return state.length > 0 ? (
     state.map((item) => {
       return (
         <Wrapper>
-          <CartItem name={item.title}></CartItem>
+          <CartItem item={item} name={item.title} quantity={item.quantity}></CartItem>
         </Wrapper>
       );
     })

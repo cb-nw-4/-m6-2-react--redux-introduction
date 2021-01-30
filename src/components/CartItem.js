@@ -1,17 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 // import InputBase from '@material-ui/core/InputBase'
+import {removeItem} from '../actions'
+import {useDispatch} from 'react-redux'
 
-const CartItem = ({name}) => {
+const CartItem = ({name, quantity, item}) => {
+  const dispatch = useDispatch()
+  const onClickFunc = () => {
+    dispatch(removeItem(item))
+  }
+
+
   return (
     <ItemWrapper>
       <ItemHeaderWrapper>
-        <p>{name}</p>
-        <p>X</p>
+        <div>{name}</div>
+        <button onClick={onClickFunc}>
+          X</button>
       </ItemHeaderWrapper>
       <QuantityContainer>
         <div>Quantity:</div>
-        <input style={{width:'25px'}}></input>
+        <input value={quantity} style={{width:'25px'}}></input>
       </QuantityContainer>
     </ItemWrapper>
   );

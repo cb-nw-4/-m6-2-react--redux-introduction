@@ -2,31 +2,25 @@ const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_ITEM': {
+    case "ADD_ITEM": {
       return {
         ...state,
         [action.item.id]: {
           ...action.item,
-          quantity: 1
-        }
-      }
+          quantity: 1,
+        },
+      };
     }
-    case 'REMOVE_ITEM': {
-      return {
-        ...state,
-        [action.item.id]: {
-          ...action.item,
-          quantity: 1
-        }
-      }
+    case "REMOVE_ITEM": {
+      const newCart = { ...state };
+      delete newCart[action.item.id];
+      return newCart;
     }
     default:
       return state;
   }
 }
 
-export const getStoreItemArray = state => {
- return (
-  Object.values(state)
-  )    
-}
+export const getStoreItemArray = (state) => {
+  return Object.values(state);
+};
