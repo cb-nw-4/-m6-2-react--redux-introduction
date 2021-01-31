@@ -6,10 +6,30 @@ import { useSelector } from "react-redux";
 import { getStoreItemArray } from "../reducers";
 
 const Cart = () => {
-//   const state = useSelector((state) => state);
-//   console.log(state);
+
   const storeItems = useSelector(getStoreItemArray);
-//   console.log(storeItems[0][0].id);
+
+  const calculateTotal = (storeItems) => {
+    const reducer = (accumulator, storeItem) => {
+      if (storeItem.id) {
+        return accumulator + (storeItem.price * storeItem.quantity);
+      } else {
+        return accumulator;
+      }
+    }
+    return storeItems.reduce(reducer, 0) / 100.0;
+  }
+
+  const calculateNumCartItems = (storeItems) => {
+    const reducer = (accumulator, storeItem) => {
+      if (storeItem.id) {
+        return accumulator + storeItem.quantity;
+      } else {
+        return accumulator;
+      }
+    }
+    return storeItems.reduce(reducer, 0);
+  }
 
   return (
     <Wrapper>
@@ -18,24 +38,22 @@ const Cart = () => {
           <YourCart>
             Your Cart
           </YourCart>
-          <Items>0 Items</Items>
+          <Items>{calculateNumCartItems(storeItems)} Items</Items>
         </TopContainer>
         <CartContainer>
         {storeItems.map(storeItem => {
-          const renderSelection = storeItem.id;  
-          const selectedItem = storeItem;
           return (
             <div>
-              {renderSelection &&
+              {storeItem.id &&
               <CartItemContainer>
-                <CartItem selectedItem={selectedItem} />
+                <CartItem selectedItem={storeItem} />
               </CartItemContainer>}
             </div>
           )
         })}
         </CartContainer>
         <BottomContainer>
-          <TotalPrice>Total: $0.00</TotalPrice>
+          <TotalPrice>Total: ${calculateTotal(storeItems)}</TotalPrice>
           <PurchaseButton>Purchase</PurchaseButton>
         </BottomContainer>
       </ContentContainer>  

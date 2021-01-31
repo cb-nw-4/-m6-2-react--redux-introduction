@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { removeItem } from "../actions";
+import { removeItem, updateQuantity } from "../actions";
 
 const CartItem = ({selectedItem}) => {
 
   const dispatch = useDispatch();
+
+  const handleOnChange = (event) => {
+    dispatch(updateQuantity(selectedItem.id, parseInt(event.target.value)))
+  };
 
   return (
     <Wrapper>
@@ -17,7 +21,7 @@ const CartItem = ({selectedItem}) => {
       </ItemContainer>  
       <QuantityContainer>
         <Quantity>Quantity: </Quantity>
-        <QuantityInput type="text" value={selectedItem.quantity}/>
+        <QuantityInput type="text" value={selectedItem.quantity} onChange={handleOnChange} />
       </QuantityContainer>
     </Wrapper>
   )
