@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { removeItem } from './actions';
+import { removeItem, updateItem } from './actions';
 
 const CartItem=({id, title, quantity})=>{
-    // console.log(props.storeItems[0].title);
+    // console.log(id, title, quantity);
     const dispatch = useDispatch();
     return (
         <Wrapper id={id}>
@@ -17,8 +17,19 @@ const CartItem=({id, title, quantity})=>{
                     <AiFillCloseCircle size={20} />
                 </Button>
             </Container>
+            <div>
+                <span>Quantity: {"  "}</span>
+                <span>
+                    <QuantityInput
+                        value={quantity}
+                        onChange={(ev)=>{
+                            let itemQuantity=ev.target.value;
+                            dispatch(updateItem({id:id, quantity:itemQuantity}));
+                        }}
+                    />
+                </span>
+            </div>
             
-            <p>{quantity}</p>
         </Wrapper>
     )
 };
@@ -41,6 +52,16 @@ const Button=styled.button`
         cursor:pointer;
     }
 
+`;
+
+const QuantityInput=styled.input`
+    background:transparent;
+    color:white;
+    max-width:30px;
+    border:0;
+    border-bottom: 4px solid white;
+    font-weight:bold;
+    text-align:center;
 `;
 
 export default CartItem;
