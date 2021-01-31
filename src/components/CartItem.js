@@ -1,17 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { removeItem } from "../actions";
 
 const CartItem = ({selectedItem}) => {
 
-  if (selectedItem) {
-    console.log(selectedItem);
-  }
+  const dispatch = useDispatch();
 
   return (
     <Wrapper>
       <ItemContainer>
         <ItemName>Product: {selectedItem.title}</ItemName>
-        <Close>X</Close>
+        <CloseButton onClick={() => dispatch(removeItem({...selectedItem}))}>
+          <Close>X</Close>
+        </CloseButton> 
       </ItemContainer>  
       <QuantityContainer>
         <Quantity>Quantity: </Quantity>
@@ -46,11 +48,21 @@ const ItemName = styled.p`
   margin: 0px;
 `;
 
-const Close = styled.p` 
+const CloseButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 25px;
+  background: none;
+  border: none;
+  margin-right: 20px;
+`;
+
+const Close = styled.p`
   font-size: 20px;
   font-weight: 500;
   color: white;
-  padding-right: 20px;
   margin: 0px;
 `;
 
