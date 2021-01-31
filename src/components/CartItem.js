@@ -1,16 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-const CartItem = () => {
+const CartItem = ({selectedItem}) => {
+
+  if (selectedItem) {
+    console.log(selectedItem);
+  }
+
   return (
     <Wrapper>
       <ItemContainer>
-        <ItemName>Hello world</ItemName>
+        <ItemName>Product: {selectedItem.title}</ItemName>
         <Close>X</Close>
       </ItemContainer>  
       <QuantityContainer>
-        <Quantity>Quantity:</Quantity>
-        <QuantityInput type="text" />
+        <Quantity>Quantity: </Quantity>
+        <QuantityInput type="text" value={selectedItem.quantity}/>
       </QuantityContainer>
     </Wrapper>
   )
@@ -20,9 +25,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100px;
+  height: 80px;
   width: 100%;
-  margin: 30px;
+  margin: 10px 30px;
   border: 1px dashed white;
 `;
 
@@ -30,11 +35,11 @@ const ItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
+  height: 40px;
 `;
 
 const ItemName = styled.p` 
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   color: white;
   padding-left: 20px;
@@ -42,7 +47,7 @@ const ItemName = styled.p`
 `;
 
 const Close = styled.p` 
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   color: white;
   padding-right: 20px;
@@ -54,7 +59,7 @@ const QuantityContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: #180921;
-  height: 50px;
+  height: 40px;
 `;
 
 const Quantity = styled.p` 

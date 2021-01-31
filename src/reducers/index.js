@@ -1,4 +1,7 @@
-const initialState = {};
+import { STORE_ITEMS } from '../data';
+
+const initialState = {STORE_ITEMS};
+// const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
@@ -15,3 +18,5 @@ export default function cartReducer(state = initialState, action) {
       return state;
   }
 }
+
+export const getStoreItemArray = (state) => Object.values(state);
