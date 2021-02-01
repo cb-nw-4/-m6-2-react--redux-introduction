@@ -26,7 +26,6 @@ const App = () => {
 const Wrapper = styled.div`
   position: relative;
   display: grid;
-  //grid-template-columns: 3fr 1fr;
   grid-template-areas:
      "header header header sidebar"
       "main main main sidebar";

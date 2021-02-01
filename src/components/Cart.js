@@ -1,26 +1,40 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Button from './Button';
 import CartItem from './CartItem';
-import { STORE_ITEMS } from '../data';
+import { getStoreItemArray } from '../reducers';
+
 
 const Cart = ()=>{
+    const storeItems = useSelector(getStoreItemArray);
+    console.log(storeItems.length)
+    const calculateTotalPrice = ()=>{
+        const totalPrice = storeItems.reduce((a,b)=>{
+            return a + b.price/100 * b.quantity;
+        }, 0);
+        return parseFloat(totalPrice).toFixed(2);
+    };
+
+
     return (
         <Wrapper>
             <Title>Your Cart</Title>
-            <Item>0 items</Item>
+            <Item>{storeItems.length} items</Item>
             <ItemWrapper>
-            {STORE_ITEMS.map((item)=>{
+            {storeItems.map((item)=>{
                 return <CartItem
-                         key={item.ide}
-                         name={item.title} 
+                         key={item.id}
+                         id={item.id}
+                         name={item.title}
+                         quantity={item.quantity} 
                         />
             })}
             </ItemWrapper>
             <Bottom>
                 <PriceWrapper>
                     <SubTitle>Total:</SubTitle>
-                    <h3>$12.45</h3>
+                    <h3>{`$${calculateTotalPrice()}`}</h3>
                 </PriceWrapper>
                 <ButtonPurchase>Purchase</ButtonPurchase>
             </Bottom>
@@ -48,7 +62,7 @@ const ItemWrapper = styled.div`
 `;
 
 const PriceWrapper = styled.div`
-    display: flex;
+    display: flex;  
 `;
 
 const Item = styled.p`
@@ -75,7 +89,7 @@ const Bottom = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 60px 30px;
-    margin-top:auto;
+    margin-top:auto;  
 `;
 
 export default Cart;
