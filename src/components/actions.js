@@ -14,7 +14,7 @@ export const removeItem = item =>{
 }
 
 export const updateItem = ({id, quantity}) =>{
-    console.log(id, quantity);
+    // console.log(id, quantity);
     return({
         type:'UPDATE_ITEM',
         id,

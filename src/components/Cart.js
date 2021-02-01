@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { getStoreItemArray } from '../reducers/index';
@@ -8,10 +8,25 @@ const Cart=()=>{
     const state = useSelector(state => state);
     // console.log(state);
     const storeItems = useSelector(getStoreItemArray);
+    const [totalItems, setTotalItems]=useState(0);
+    const [totalPrice, setTotalPrice]=useState(0);
     // console.log(storeItems);
+    useEffect(()=>{
+        let tempQuant=0;
+        let tempPrice=0
+        storeItems.forEach(elem=>{
+            tempQuant=tempQuant+elem.quantity;
+            setTotalItems(tempQuant);
+            tempPrice=tempPrice+(elem.quantity*elem.price);
+            setTotalPrice(tempPrice);
+        });
+    console.log(totalItems);
+    },[state]);
+    
     return(
         <Wrapper>
-            <p>You are purchasing {storeItems.length} item(s).</p>
+            <Header>Your Cart</Header>
+            <p>You are purchasing {totalItems} item(s).</p>
             {storeItems.map((elem, index)=>{
                 return (
                 <CartItem 
@@ -21,12 +36,53 @@ const Cart=()=>{
                     quantity={elem.quantity}
                 />)
             })}
+            <Footer>
+                <TotalAmount>
+                    ${totalPrice/100}
+                </TotalAmount>
+                <PurchaseButton onClick={ev=>ev.preventDefault()}>
+                    Purchase
+                </PurchaseButton>
+            </Footer>
         </Wrapper>
     )
 };
 
 const Wrapper=styled.div`
     color:white;
+    position:sticky;
+    height:100vh;
 `;
+
+const Header=styled.h1`
+    font-weight: normal;
+    font-family: 'Fredoka One';
+`;
+
+const Footer=styled.div`
+    bottom:5px;
+    display:flex;
+    justify-content:space-between;
+    margin:10px;
+`;
+
+const TotalAmount=styled.p`
+    font-family: 'Fredoka One';
+    color:white;
+`;
+
+const PurchaseButton=styled.button`
+    border-radius: 12px;
+    background: #ff406e;
+    height:50px;
+    width:100px;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    outline:none;
+`;
+
 
 export default Cart;

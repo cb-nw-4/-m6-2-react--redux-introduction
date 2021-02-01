@@ -19,7 +19,7 @@ export default function cartReducer(state = initialState, action) {
             return newState;
         }
         case 'UPDATE_ITEM': {
-            console.log(state, action)
+            // console.log(state, action)
             return{
                 ...state,
                 [action.id]: {

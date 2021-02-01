@@ -35,6 +35,9 @@ const CartItem=({id, title, quantity})=>{
 };
 const Wrapper=styled.div`
     color:white;
+    padding:5px;
+    border: 1px dashed gray;
+    margin: 10px 10px 10px 0;
 `;
 
 const Container=styled.div`
@@ -43,7 +46,6 @@ const Container=styled.div`
 `;
 
 const Button=styled.button`
-    margin-right:10px;
     border:none;
     outline:none;
     background:transparent;
