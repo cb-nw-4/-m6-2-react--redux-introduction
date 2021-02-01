@@ -6,8 +6,6 @@ import { STORE_ITEMS } from '../data';
 import StoreItem from './StoreItem';
 
 const ItemGrid = () => {
-
-  console.log(STORE_ITEMS);
   
   return (
     <Wrapper>

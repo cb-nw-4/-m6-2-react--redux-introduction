@@ -1,8 +1,4 @@
-import { STORE_ITEMS } from '../data';
-
-const initialState = {STORE_ITEMS};
-
-console.log(initialState)
+const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
 
