@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { removeItem } from '../actions';
+import { removeItem, updateQuantity } from '../actions';
 
 import CartItem from './CartItem';
 import { getStoreItemArray } from '../reducers';
@@ -11,12 +11,19 @@ import { getStoreItemArray } from '../reducers';
 const Cart = () => {
   const dispatch = useDispatch();
   const storeItems = useSelector(getStoreItemArray);
+  console.log(storeItems);
   let totalPrice = 0;
   
-  storeItems.forEach(item => totalPrice += item.price);
+  storeItems.forEach(item => totalPrice += Number(item.price * item.quantity));
 
   const handleRemoveButton = (itemId) => {
     dispatch(removeItem({ id: itemId }));
+  };
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    if ((/^\d+$/.test(newQuantity) || newQuantity == '')) {
+      dispatch(updateQuantity({ id: itemId, newQuantity: Number(newQuantity) }));
+    }
   };
 
   return (
@@ -25,11 +32,12 @@ const Cart = () => {
         <CartTitle>Your Cart</CartTitle>
         <CartItemTotal>1 Item</CartItemTotal>
         {storeItems.map(item => <CartItem
-          key={uuidv4()}
+          key={item.id}
           title={item.title}
           quantity={item.quantity}
           itemId={item.id}
           handleRemoveButton={handleRemoveButton}
+          handleQuantityChange={handleQuantityChange}
         />)}
       </CartHeader>
       <CartTotal>

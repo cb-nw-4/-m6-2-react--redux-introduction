@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CartItem = ({ title, quantity, itemId, handleRemoveButton }) => {
+const CartItem = ({
+  title,
+  quantity,
+  itemId,
+  handleRemoveButton,
+  handleQuantityChange
+}) => {
+  console.log(typeof(quantity));
+  console.log(quantity);
   return (
     <Wrapper>
       <ItemName>
@@ -11,7 +19,7 @@ const CartItem = ({ title, quantity, itemId, handleRemoveButton }) => {
       <ItemQuantity>
         Quantity:
         <Form>
-          <Input type="text" value={quantity} maxLength="2" />
+          <Input type="text" onChange={(ev) => handleQuantityChange(itemId, ev.target.value)} value={String(quantity)} maxLength="2" />
         </Form>
       </ItemQuantity>
     </Wrapper>
