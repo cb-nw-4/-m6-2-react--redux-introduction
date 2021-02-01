@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CartItem = () => {
+const CartItem = ({ title, quantity }) => {
   return (
     <Wrapper>
       <ItemName>
-        <div>Hello</div>
+        <div>{title}</div>
         <div><Button>x</Button></div>
       </ItemName>
       <ItemQuantity>
         Quantity:
         <Form>
-          <Input type="text" maxLength="2" />
+          <Input type="text" value={quantity} maxLength="2" />
         </Form>
       </ItemQuantity>
     </Wrapper>

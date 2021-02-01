@@ -1,18 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import CartItem from './CartItem';
+import { getStoreItemArray } from '../reducers';
 
 const Cart = () => {
+  const storeItems = useSelector(getStoreItemArray);
+  let totalPrice = 0;
+  
+  storeItems.forEach(item => totalPrice += item.price);
+
+  console.log(storeItems);
+
   return (
     <Wrapper>
       <CartHeader>
         <CartTitle>Your Cart</CartTitle>
         <CartItemTotal>1 Item</CartItemTotal>
-        <CartItem />
+        {storeItems.map(item => <CartItem
+          key={uuidv4()}
+          title={item.title}
+          quantity={item.quantity}
+        />)}
       </CartHeader>
       <CartTotal>
-        $100.00
+        ${totalPrice / 100}
         <PurchaseButton>Purchase</PurchaseButton>
       </CartTotal>
     </Wrapper>

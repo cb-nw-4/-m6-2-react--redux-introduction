@@ -1,6 +1,6 @@
 const initialState = {};
 
-const cartReducer = (state = initialState, action) => {
+export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_ITEM': {
       return {
@@ -17,4 +17,4 @@ const cartReducer = (state = initialState, action) => {
   }
 };
 
-export default cartReducer;
+export const getStoreItemArray = (state) => Object.values(state);
