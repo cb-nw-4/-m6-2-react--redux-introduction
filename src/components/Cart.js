@@ -25,17 +25,19 @@ const Cart=()=>{
     
     return(
         <Wrapper>
-            <Header>Your Cart</Header>
-            <p>You are purchasing {totalItems} item(s).</p>
-            {storeItems.map((elem, index)=>{
-                return (
-                <CartItem 
-                    key={elem.id+index}
-                    id={elem.id}
-                    title={elem.title}
-                    quantity={elem.quantity}
-                />)
-            })}
+            <Header>
+                <Title>Your Cart</Title>
+                <p>You are purchasing {totalItems} item(s).</p>
+                {storeItems.map((elem, index)=>{
+                    return (
+                    <CartItem 
+                        key={elem.id+index}
+                        id={elem.id}
+                        title={elem.title}
+                        quantity={elem.quantity}
+                    />)
+                })}
+            </Header>
             <Footer>
                 <TotalAmount>
                     ${totalPrice/100}
@@ -52,9 +54,14 @@ const Wrapper=styled.div`
     color:white;
     position:sticky;
     height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 `;
 
-const Header=styled.h1`
+const Header=styled.div``;
+
+const Title=styled.h1`
     font-weight: normal;
     font-family: 'Fredoka One';
 `;
