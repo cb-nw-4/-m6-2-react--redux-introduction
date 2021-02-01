@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CartItem = ({ title, quantity }) => {
+const CartItem = ({ title, quantity, itemId, handleRemoveButton }) => {
   return (
     <Wrapper>
       <ItemName>
         <div>{title}</div>
-        <div><Button>x</Button></div>
+        <div><Button onClick={() => handleRemoveButton(itemId)}>x</Button></div>
       </ItemName>
       <ItemQuantity>
         Quantity:
@@ -40,6 +40,7 @@ const Button = styled.button`
   color: white;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 `;
 
 const ItemQuantity = styled.div`

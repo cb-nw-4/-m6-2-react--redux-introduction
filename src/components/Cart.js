@@ -1,18 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+
+import { removeItem } from '../actions';
 
 import CartItem from './CartItem';
 import { getStoreItemArray } from '../reducers';
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const storeItems = useSelector(getStoreItemArray);
   let totalPrice = 0;
   
   storeItems.forEach(item => totalPrice += item.price);
 
-  console.log(storeItems);
+  const handleRemoveButton = (itemId) => {
+    dispatch(removeItem({ id: itemId }));
+  };
 
   return (
     <Wrapper>
@@ -23,6 +28,8 @@ const Cart = () => {
           key={uuidv4()}
           title={item.title}
           quantity={item.quantity}
+          itemId={item.id}
+          handleRemoveButton={handleRemoveButton}
         />)}
       </CartHeader>
       <CartTotal>
