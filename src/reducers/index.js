@@ -1,5 +1,5 @@
 
-import produce from'immer';
+import {produce} from'immer';
 
 
 const initialState = {};
@@ -33,6 +33,16 @@ export default function cartReducer(state = initialState, action) {
             return produce(state, (draftState) =>{
                 const {item, key, value} = action;
                 draftState[item.id][key]= value;
+            })
+
+        }
+
+        case 'CLEAR_CART':{
+
+            
+            return produce(state, (draftState) =>{
+
+                return draftState = initialState
             })
 
         }

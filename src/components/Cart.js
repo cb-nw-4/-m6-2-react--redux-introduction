@@ -1,11 +1,12 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import CartItem from './CartItem';
 import styled from 'styled-components';
 
 import { getStoreItemArray } from "../reducers";
 import {formattedPrice} from "../helpers";
+import {clearCart} from '../actions';
 
 import Button from './Button';
 
@@ -14,13 +15,17 @@ const Cart = () => {
 
     const state = useSelector(getStoreItemArray)
 
+    const dispatch = useDispatch();
 
-
-    console.log(state)
     let totalPrice = 0; 
     
     return (
         <Wrapper>
+
+            <Button style={{backgroundColor: '#FF8C00', color:"#8B0000", opacity: "0.7"}} onClick={() =>{ 
+                const itemsClear = [...state]
+                dispatch(clearCart(itemsClear))}
+            } >Clear cart</Button>
 
             <h1>
                 Your Cart
@@ -54,7 +59,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
-
+    
 `
 
 const DivFooter = styled.div`
@@ -62,6 +67,7 @@ const DivFooter = styled.div`
     justify-content: space-between;
     align-items: baseline;
     padding: 20px;
+
 
 `
 

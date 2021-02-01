@@ -6,12 +6,9 @@ import { addItem, updateQuantity } from '../actions';
 import Button from './Button';
 import {formattedPrice} from '../helpers';
 
-const StoreItem = ({ item, id, title, src, price }) => {
+const StoreItem = ({ id, title, src, price }) => {
 
   const state = useSelector(state => state)
-
-  console.log(state, 'state')
-
 
   const dispatch = useDispatch();
 

@@ -15,3 +15,8 @@ export const updateQuantity = (item, key, value) =>({
     key,
     value
 })
+
+export const clearCart = item => ({
+    type: 'CLEAR_CART',
+    item,
+})
