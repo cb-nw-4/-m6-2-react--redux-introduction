@@ -1,6 +1,6 @@
 # Exercise 5: Quantities
 
-We want to let the user change the quantity of items in the cart, in two different ways:
+We want to let the user change the quantity of items in the cart, in two different way
 
 1. Clicking the "Add to cart" button should add 1 more quantity each time:
 
