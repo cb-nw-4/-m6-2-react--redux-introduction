@@ -8,8 +8,6 @@ const CartItem = ({
   handleRemoveButton,
   handleQuantityChange
 }) => {
-  console.log(typeof(quantity));
-  console.log(quantity);
   return (
     <Wrapper>
       <ItemName>
@@ -19,7 +17,12 @@ const CartItem = ({
       <ItemQuantity>
         Quantity:
         <Form>
-          <Input type="text" onChange={(ev) => handleQuantityChange(itemId, ev.target.value)} value={String(quantity)} maxLength="2" />
+          <Input
+            type="text"
+            onChange={(ev) => handleQuantityChange(itemId, ev.target.value)}
+            value={String(quantity)}
+            maxLength="2"
+          />
         </Form>
       </ItemQuantity>
     </Wrapper>

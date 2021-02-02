@@ -10,7 +10,6 @@ import { getStoreItemArray } from '../reducers';
 const Cart = () => {
   const dispatch = useDispatch();
   const storeItems = useSelector(getStoreItemArray);
-  console.log(storeItems);
   let totalPrice = 0;
   
   storeItems.forEach(item => totalPrice += Number(item.price * item.quantity));
@@ -20,7 +19,7 @@ const Cart = () => {
   };
 
   const handleQuantityChange = (itemId, newQuantity) => {
-    if ((/^\d+$/.test(newQuantity) || newQuantity == '')) {
+    if ((/^\d+$/.test(newQuantity) || newQuantity === '')) {
       dispatch(updateQuantity({ id: itemId, newQuantity: Number(newQuantity) }));
     }
   };
