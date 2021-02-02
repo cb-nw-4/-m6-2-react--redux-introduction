@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { getStoreItemArray } from '../reducers/index';
 import CartItem from './CartItem';
+import Button from './Button';
 
 const Cart=()=>{
     const state = useSelector(state => state);
@@ -42,9 +43,9 @@ const Cart=()=>{
                 <TotalAmount>
                     Price: ${totalPrice/100}
                 </TotalAmount>
-                <PurchaseButton onClick={ev=>ev.preventDefault()}>
+                <PurchasedButton onClick={ev=>ev.preventDefault()}>
                     Purchase
-                </PurchaseButton>
+                </PurchasedButton>
             </Footer>
         </Wrapper>
     )
@@ -53,7 +54,7 @@ const Cart=()=>{
 const Wrapper=styled.div`
     color:white;
     position:sticky;
-    background-color:#3c1f41;
+    background-color:inherit;
     min-width:250px;
     height:100vh;
     display:flex;
@@ -63,7 +64,9 @@ const Wrapper=styled.div`
     right:0;
 `;
 
-const Header=styled.div``;
+const Header=styled.div`
+    margin-bottom:5px;
+`;
 
 const Title=styled.h1`
     font-weight: normal;
@@ -82,17 +85,9 @@ const TotalAmount=styled.p`
     color:white;
 `;
 
-const PurchaseButton=styled.button`
-    border-radius: 12px;
-    background: #ff406e;
-    height:50px;
+const PurchasedButton=styled(Button)`
+    height:fit-content;
     width:100px;
-    color: white;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    outline:none;
 `;
 
 

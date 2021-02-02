@@ -10,7 +10,7 @@ const CartItem=({id, title, quantity})=>{
     return (
         <Wrapper id={id}>
             <Container>
-                <span>{title}</span>
+                <Title><strong>{title}</strong></Title>
                 <Button onClick={()=>{
                     dispatch(removeItem(id))
                 }}>
@@ -43,6 +43,10 @@ const Wrapper=styled.div`
 const Container=styled.div`
     display:flex;
     justify-content:space-between;
+`;
+
+const Title=styled.span`
+    font-family: 'Fredoka One';
 `;
 
 const Button=styled.button`

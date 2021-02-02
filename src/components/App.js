@@ -49,7 +49,7 @@ const CartWrapper = styled.div`
   grid-area: sidebar;
   border-left: 3px dashed #ff406e;
   padding-left: 8px;
-  background-color:black;
+  background-color:#3c1f41;
 `;
 
 export default App;
