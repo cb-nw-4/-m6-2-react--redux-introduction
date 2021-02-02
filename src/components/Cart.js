@@ -27,7 +27,7 @@ const Cart=()=>{
         <Wrapper>
             <Header>
                 <Title>Your Cart</Title>
-                <p>You are purchasing {totalItems} item(s).</p>
+                <p>You are purchasing <strong>{totalItems}</strong> item(s).</p>
                 {storeItems.map((elem, index)=>{
                     return (
                     <CartItem 
@@ -40,7 +40,7 @@ const Cart=()=>{
             </Header>
             <Footer>
                 <TotalAmount>
-                    ${totalPrice/100}
+                    Price: ${totalPrice/100}
                 </TotalAmount>
                 <PurchaseButton onClick={ev=>ev.preventDefault()}>
                     Purchase
@@ -53,10 +53,14 @@ const Cart=()=>{
 const Wrapper=styled.div`
     color:white;
     position:sticky;
+    background-color:#3c1f41;
+    min-width:250px;
     height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    top:0;
+    right:0;
 `;
 
 const Header=styled.div``;
