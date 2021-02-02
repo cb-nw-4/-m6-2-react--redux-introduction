@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 // import InputBase from '@material-ui/core/InputBase'
-import {removeItem} from '../actions'
+import {removeItem, updateQuantity} from '../actions'
 import {useDispatch} from 'react-redux'
 
 const CartItem = ({name, quantity, item}) => {
   const dispatch = useDispatch()
   const onClickFunc = () => {
     dispatch(removeItem(item))
+  }
+  const onChangeFunc = (ev) => {
+    const newQuantity = ev.target.value
+    dispatch(updateQuantity(item, newQuantity))
   }
 
 
@@ -20,7 +24,9 @@ const CartItem = ({name, quantity, item}) => {
       </ItemHeaderWrapper>
       <QuantityContainer>
         <div>Quantity:</div>
-        <input value={quantity} style={{width:'25px'}}></input>
+        <input 
+        onChange={onChangeFunc}
+        value={quantity} style={{width:'25px'}}></input>
       </QuantityContainer>
     </ItemWrapper>
   );

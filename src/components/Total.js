@@ -1,14 +1,26 @@
 import React from 'react'
 import styled from "styled-components";
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import { getStoreItemArray } from "../reducers/index";
+import {useSelector} from 'react-redux'
 
 
 const Total = ({price}) => {
+  const currentState = useSelector(getStoreItemArray)
+  // console.log(currentState)
+  const priceArray = currentState.map((item) => {
+    return (
+      item.price * item.quantity
+    )
+  })
+  const totalPrice = priceArray.reduce((accum, curr) => {
+    return accum + curr
+  }, 0)
+
   return (
     <TotalWrapper>
       <TotalPriceContainer>
-        Total: ${price}
+        Total: ${totalPrice}
       </TotalPriceContainer>
       <Button variant="contained" color="secondary">
         Purchase

@@ -1,22 +1,21 @@
 const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
-  const addedCart = {...state}
-  console.log(addedCart)
+  const addedCart = { ...state };
+
   switch (action.type) {
     case "ADD_ITEM": {
       if (addedCart[action.item.id]) {
-        const quantity = addedCart[action.item.id].quantity
-        console.log(quantity)
+        const quantity = addedCart[action.item.id].quantity;
+
         return {
           ...state,
           [action.item.id]: {
             ...action.item,
-            quantity: quantity + 1
-          }
-        }
-      }
-      else {
+            quantity: quantity + 1,
+          },
+        };
+      } else {
         return {
           ...state,
           [action.item.id]: {
@@ -30,6 +29,16 @@ export default function cartReducer(state = initialState, action) {
       const newCart = { ...state };
       delete newCart[action.item.id];
       return newCart;
+    }
+    case "UPDATE_QUANTITY": {
+      return {
+        ...state,
+        [action.item.id] : {
+          ...action.item,
+          quantity: action.quantity || ""
+        }
+      }
+      
     }
     default:
       return state;
