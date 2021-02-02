@@ -22,7 +22,7 @@ import Button from './Button';
 const Cart = () => {
 
     const state = useSelector(getStoreItemArray);
-    const [tax, settax] = useState(0);
+    const [tax, settax] = useState('');
 
     const dispatch = useDispatch();
 
