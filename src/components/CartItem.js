@@ -28,8 +28,8 @@ const CartItem = ({
 
 const Wrapper = styled.div`
   height: 100px;
-  margin-top: 40px;
   padding-bottom: 1px;
+  margin-bottom: 20px;
   border: 2px dashed rgba(242, 193, 229, 0.3)
 `;
 

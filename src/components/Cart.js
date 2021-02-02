@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 
 import { removeItem, updateQuantity } from '../actions';
 
@@ -30,7 +29,8 @@ const Cart = () => {
     <Wrapper>
       <CartHeader>
         <CartTitle>Your Cart</CartTitle>
-        <CartItemTotal>1 Item</CartItemTotal>
+        <CartItemTotal>{storeItems.length} {storeItems.length === 1 ? 'Item' : 'Items'} </CartItemTotal>
+        <CartItems>
         {storeItems.map(item => <CartItem
           key={item.id}
           title={item.title}
@@ -39,6 +39,7 @@ const Cart = () => {
           handleRemoveButton={handleRemoveButton}
           handleQuantityChange={handleQuantityChange}
         />)}
+        </CartItems>
       </CartHeader>
       <CartTotal>
         ${totalPrice / 100}
@@ -54,31 +55,39 @@ const Wrapper = styled.div`
   justify-content: space-between;
   position: sticky;
   top: 0px;
-  min-width: 250px;
+  min-width: 275px;
   height: 100vh;
-  background: #401f43;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: white;
-  padding-top: 16px;
-  padding-bottom: 16px;
-
-  /* -webkit-box-pack: justify; */
+  background-color: #401f43;
 `;
 
 const CartHeader = styled.div`
-  padding-left: 30px;
-  padding-right: 30px;
   color: white;
 `;
 
-const CartTitle = styled.span`
+const CartTitle = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 20px;
 `;
 
-const CartItemTotal = styled.p`
-  /* font-size: 1.5rem; */
-  /* font-weight: bold; */
-  color: rgba(242, 193, 229, 1);
+const CartItemTotal = styled.div`
+  overflow: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 20px;
+  color: white;
+`;
+
+const CartItems = styled.div`
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  padding-left: 30px;
+  padding-right: 30px;
 `;
 
 const CartTotal = styled.div`
@@ -87,18 +96,17 @@ const CartTotal = styled.div`
   align-items: center;
   font-size: 1.5rem;
   font-weight: bold;
+  margin-bottom: 20px;
 `;
 
 const PurchaseButton = styled.button`
-  /* width: 100px; */
-  /* height: 30px; */
   border-radius: 10px;
   font-size: 1rem;
   font-weight: bold;
   color: white;
   border: none;
   background-color: #ff406e;
-  padding: 5px 30px;
+  padding: 5px 40px;
   margin-left: 10px;
 `;
 
