@@ -12,4 +12,9 @@ export const updateQuantity = (itemId, quantity) => ({
     type: 'UPDATE_QUANTITY',
     itemId,
     quantity,
-})
+});
+
+export const clearCart = item => ({
+    type: 'CLEAR_CART',
+    item,
+});

@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from "./Button";
 import CartItem from "./CartItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getStoreItemArray } from "../reducers";
+import { clearCart } from "../actions";
 
 const Cart = () => {
 
   const storeItems = useSelector(getStoreItemArray);
+
+  const dispatch = useDispatch();
 
   const calculateTotal = (storeItems) => {
     const reducer = (accumulator, storeItem) => {
@@ -53,7 +56,12 @@ const Cart = () => {
         })}
         </CartContainer>
         <BottomContainer>
-          <TotalPrice>Total: ${calculateTotal(storeItems)}</TotalPrice>
+          <TotalClearCartContainer>
+            <TotalPrice>Total: ${calculateTotal(storeItems)}</TotalPrice>
+            <ClearCartButton onClick={() => dispatch(clearCart({...storeItems}))}>
+              <ClearCartText>Clear Cart</ClearCartText>
+            </ClearCartButton>
+          </TotalClearCartContainer>
           <PurchaseButton>Purchase</PurchaseButton>
         </BottomContainer>
       </ContentContainer>  
@@ -119,11 +127,34 @@ const BottomContainer = styled.div`
   align-items: center;
 `;
 
+const TotalClearCartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding: 30px 0px 30px 30px;
+`;
+
 const TotalPrice = styled.p` 
 font-size: 24px;
   color: white;
   font-weight: 700;
-  padding: 30px 0px 30px 30px;
+`;
+
+const ClearCartButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px dashed white;
+  background-color: transparent;
+`;
+
+const ClearCartText = styled.p`
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
 `;
 
 const PurchaseButton = styled(Button)`
