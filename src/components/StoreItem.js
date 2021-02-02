@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { addItem } from './actions';
 
 const StoreItem = ({ id, title, src, price }) => {
-  // console.log(price);
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',

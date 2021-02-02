@@ -7,11 +7,9 @@ import Button from './Button';
 
 const Cart=()=>{
     const state = useSelector(state => state);
-    // console.log(state);
     const storeItems = useSelector(getStoreItemArray);
     const [totalItems, setTotalItems]=useState(0);
     const [totalPrice, setTotalPrice]=useState(0);
-    // console.log(storeItems);
     useEffect(()=>{
         let tempQuant=0;
         let tempPrice=0

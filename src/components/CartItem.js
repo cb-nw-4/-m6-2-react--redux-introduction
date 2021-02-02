@@ -5,7 +5,6 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { removeItem, updateItem } from './actions';
 
 const CartItem=({id, title, quantity})=>{
-    // console.log(id, title, quantity);
     const dispatch = useDispatch();
     return (
         <Wrapper id={id}>

@@ -9,7 +9,6 @@ import { getStoreItemArray } from '../reducers/index';
 
 const App = () => {
   const storeItems = useSelector(getStoreItemArray);
-  // console.log(Cart);
   return (
     <Wrapper>
       <Header>
