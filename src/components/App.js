@@ -3,25 +3,34 @@ import styled from 'styled-components';
 
 import Logo from './Logo';
 import ItemGrid from './ItemGrid';
+import Cart from './Cart';
 import GlobalStyles from './GlobalStyles';
 
 const App = () => {
   return (
     <Wrapper>
+      <GlobalStyles />
       <Header>
         <Logo />
       </Header>
       <ItemGridWrapper>
         <ItemGrid />
       </ItemGridWrapper>
-
-      <GlobalStyles />
+      <CartWrapper>
+        <Cart />
+      </CartWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   position: relative;
+  display: grid;
+  grid-template-rows: 0.5fr 6fr;
+  grid-template-columns: 2.5fr 1fr;
+  grid-template-areas:
+    'header sidebar'
+    'main sidebar';
 `;
 
 const Header = styled.header`
@@ -38,6 +47,8 @@ const CartWrapper = styled.div`
   grid-area: sidebar;
   border-left: 3px dashed #ff406e;
   padding-left: 8px;
+  background: #441f47;
+  background-clip: content-box;
 `;
 
 export default App;
