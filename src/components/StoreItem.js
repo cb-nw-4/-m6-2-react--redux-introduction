@@ -1,13 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector} from 'react-redux';
 
+import { addItem, updateQuantity } from '../actions';
 import Button from './Button';
+import {formattedPrice} from '../helpers';
 
 const StoreItem = ({ id, title, src, price }) => {
-  const formattedPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(price / 100);
+
+  const state = useSelector(state => state)
+
+  const dispatch = useDispatch();
+
+  
+
 
   return (
     <Wrapper>
@@ -15,7 +21,18 @@ const StoreItem = ({ id, title, src, price }) => {
         <Image src={src} alt={`${title} sticker`} />
       </ImageWrapper>
       <Title>{title}</Title>
-      <Button>Add to Cart — {formattedPrice}</Button>
+      <Button
+        onClick = {() => {
+            if(state[id]){
+              const itemToUpdate = {...state[id]}
+              dispatch(updateQuantity(itemToUpdate, 'quantity', itemToUpdate.quantity + 1 ))
+            } else{
+              dispatch(addItem({id, title, price}))
+            }
+        }
+        }
+      >
+        Add to Cart — {formattedPrice(price)}</Button>
     </Wrapper>
   );
 };
