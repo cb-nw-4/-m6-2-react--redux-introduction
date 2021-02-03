@@ -5,8 +5,7 @@ import styled from "styled-components";
 import { updateQuantity, removeItem } from "../actions";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ key, id, title, quantity, updatedQt, setUpdatedQt }) => {
-  const [updatedValue, setUpdatedValue] = useState(1);
+const CartItem = ({ key, id, title, quantity }) => {
   const dispatch = useDispatch();
   const storeState = useSelector(getStoreItemArray);
 
@@ -16,7 +15,7 @@ const CartItem = ({ key, id, title, quantity, updatedQt, setUpdatedQt }) => {
   };
 
 
-  console.log(updatedValue);
+ 
   return (
     <Wrapper key={key} id={id}>
       <ItemMain>

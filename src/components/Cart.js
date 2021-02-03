@@ -3,15 +3,11 @@ import { useSelector } from "react-redux";
 import { getStoreItemArray } from "../reducers";
 import styled from "styled-components";
 import CartItem from "./CartItem";
-import { useDispatch } from "react-redux";
-import { updateQuantity, removeItem } from "../actions";
+
 
 const Cart = () => {
-  const [updatedQt, setUpdatedQt] = useState(1);
-
   const storeState = useSelector(getStoreItemArray);
-console.log(storeState)
-  let totalPrice = 0;
+
   const calculateTotal = (storeState) => {
     const reduceTotal = (accumulator, storeItem) => {
       if (storeItem.id) {
@@ -22,13 +18,23 @@ console.log(storeState)
     };
     return storeState.reduce(reduceTotal, 0) / 100;
   };
+  const calculateTotalItem = (storeState) => {
+    const reducer = (accumulator, storeItem) => {
+      if (storeItem.id) {
+        return accumulator + storeItem.quantity;
+      } else {
+        return accumulator;
+      }
+    }
+    return storeState.reduce(reducer, 0);
+  }
 
-  console.log(calculateTotal(storeState));
+
   return (
     <Wrapper>
       <Main>
         <h1>Your cart</h1>
-        <ItemNum> {storeState.length} items</ItemNum>
+        <ItemNum> {calculateTotalItem(storeState)} items</ItemNum>
         <CartWrapper>
           {storeState &&
             storeState.map((item) => {
@@ -38,8 +44,6 @@ console.log(storeState)
                   id={item.id}
                   title={item.title}
                   quantity={item.quantity}
-                  updatedQt={updatedQt}
-                  setUpdatedQt={setUpdatedQt}
                 />
               );
             })}
