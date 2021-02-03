@@ -52,14 +52,13 @@ const Cart=()=>{
 const Wrapper=styled.div`
     color:white;
     position:sticky;
+    top:0;
     background-color:inherit;
     min-width:250px;
     height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    top:0;
-    right:0;
 `;
 
 const Header=styled.div`

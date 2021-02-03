@@ -30,7 +30,8 @@ const App = () => {
 const Wrapper = styled.div`
   position: relative;
   display:grid;
-  grid-template-areas:"header header header sidebar" "main main main sidebar";
+  grid-template-areas:"header header header sidebar" 
+                      "main main main sidebar";
   height:100vh;
 `;
 
@@ -45,6 +46,7 @@ const ItemGridWrapper = styled.main`
 `;
 
 const CartWrapper = styled.div`
+  position:relative;
   grid-area: sidebar;
   border-left: 3px dashed #ff406e;
   padding-left: 8px;
