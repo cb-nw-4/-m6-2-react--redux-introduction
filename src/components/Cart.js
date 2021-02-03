@@ -1,43 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getStoreItemArray } from "../reducers";
 import styled from "styled-components";
 import CartItem from "./CartItem";
+import { useDispatch } from "react-redux";
+import { updateQuantity, removeItem } from "../actions";
 
 const Cart = () => {
-  const state = useSelector(getStoreItemArray);
-  console.log(state);
+  const [updatedQt, setUpdatedQt] = useState(1);
 
+  const storeState = useSelector(getStoreItemArray);
+console.log(storeState)
   let totalPrice = 0;
-  state.forEach((item) =>{
-      return totalPrice += item.price * item.quantity;
-  })
+  const calculateTotal = (storeState) => {
+    const reduceTotal = (accumulator, storeItem) => {
+      if (storeItem.id) {
+        return accumulator + storeItem.price * storeItem.quantity;
+      } else {
+        return accumulator;
+      }
+    };
+    return storeState.reduce(reduceTotal, 0) / 100;
+  };
 
-  const finalPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(totalPrice / 100);
+  console.log(calculateTotal(storeState));
   return (
     <Wrapper>
       <Main>
         <h1>Your cart</h1>
-        <ItemNum> {state.length} items</ItemNum>
+        <ItemNum> {storeState.length} items</ItemNum>
         <CartWrapper>
-          {state &&
-            state.map((item) => {
+          {storeState &&
+            storeState.map((item) => {
               return (
                 <CartItem
                   key={item.id}
                   id={item.id}
                   title={item.title}
-                  quantity={item.title}
+                  quantity={item.quantity}
+                  updatedQt={updatedQt}
+                  setUpdatedQt={setUpdatedQt}
                 />
               );
             })}
         </CartWrapper>
       </Main>
       <Total>
-        <TotalNum>Total: {finalPrice}</TotalNum>
+        <TotalNum>Total: {calculateTotal(storeState)}</TotalNum>
         <PurchaseBtn>Purchase</PurchaseBtn>
       </Total>
     </Wrapper>
@@ -50,7 +59,9 @@ const Wrapper = styled.div`
 `;
 
 const ItemNum = styled.h5``;
-const CartWrapper = styled.ul``;
+const CartWrapper = styled.ul`
+  padding: 10px;
+`;
 const Main = styled.div``;
 const Total = styled.div`
   display: flex;

@@ -1,23 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getStoreItemArray } from "../reducers";
 import styled from "styled-components";
-import { removeItem } from "../actions";
+import { updateQuantity, removeItem } from "../actions";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ key, id, title, quantity }) => {
+const CartItem = ({ key, id, title, quantity, updatedQt, setUpdatedQt }) => {
+  const [updatedValue, setUpdatedValue] = useState(1);
   const dispatch = useDispatch();
+  const storeState = useSelector(getStoreItemArray);
+
+
+  const handleChange = (event) => {
+    dispatch(updateQuantity({ itemId: id, quantity: event.target.value }));
+  };
+
+
+  console.log(updatedValue);
   return (
-    <Wrapper>
-      <ListItem key={key}>
-        <ItemMain>
-          {" "}
-          <ItemName>{title}</ItemName>
-          <CloseBtn onClick={() => dispatch(removeItem({ id }))}>X</CloseBtn>
-        </ItemMain>
-        <Quantity>
-          Quantity:
-          <InputQt type="number" value="1"></InputQt>
-        </Quantity>
-      </ListItem>
+    <Wrapper key={key} id={id}>
+      <ItemMain>
+        {" "}
+        <ItemName>{title}</ItemName>
+        <CloseBtn onClick={() => dispatch(removeItem({ id }))}>X</CloseBtn>
+      </ItemMain>
+      <Quantity>
+        Quantity:
+        <InputQt value={quantity} onChange={handleChange} />
+      </Quantity>
     </Wrapper>
   );
 };
@@ -25,10 +35,10 @@ const CartItem = ({ key, id, title, quantity }) => {
 const Wrapper = styled.div`
   list-style-type: none;
   padding: 10px;
+  border: #643c68 dashed 1.5px;
 `;
 
 const ListItem = styled.li`
-  border: white dashed 1px;
   padding: 10px;
 `;
 const ItemMain = styled.div`
@@ -48,5 +58,5 @@ const CloseBtn = styled.button`
   font-size: 100%;
 `;
 const ItemName = styled.h3``;
-const Quantity = styled.p``;
+const Quantity = styled.div``;
 export default CartItem;
