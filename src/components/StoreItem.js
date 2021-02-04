@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes }  from 'styled-components';
 
 import Button from './Button';
 
@@ -12,7 +12,9 @@ const StoreItem = ({ id, title, src, price }) => {
   return (
     <Wrapper>
       <ImageWrapper>
-        <Image src={src} alt={`${title} sticker`} />
+        <ImageBox>
+          <Image src={src} alt={`${title} sticker`} />
+        </ImageBox>
       </ImageWrapper>
       <Title>{title}</Title>
       <Button>Add to Cart — {formattedPrice}</Button>
@@ -29,6 +31,21 @@ const Wrapper = styled.article`
     3px 41.8px 33.4px rgba(0, 0, 0, 0.028), 3px 100px 80px rgba(0, 0, 0, 0.02);
   border-radius: 16px;
   text-align: center;
+`;
+
+const rotateGrow = keyframes`
+  from {
+      transform: rotate(0deg) scale(1);
+  }
+  to {
+      transform: rotate(15deg) scale(1.3);
+  }
+`;
+
+const ImageBox = styled.div`
+  &:hover {
+    animation: ${rotateGrow} 1000ms forwards
+  };
 `;
 
 const ImageWrapper = styled.div`
