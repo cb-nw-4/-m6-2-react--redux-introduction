@@ -10,6 +10,7 @@ const Cart = () => {
     const storeItems = useSelector(getStoreItemArray);
     let total=0;
     storeItems.map((item)=>total+=item.quantity*item.price);
+
     let formatedPrice=new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -21,13 +22,13 @@ const Cart = () => {
           <NumItems>0 items</NumItems>
           <List>
             {
-            storeItems.map((item)=> item.quantity === 0? null:
+            storeItems.map((item)=> item.quantity&&item.quantity>0?
             <CartItem 
                 key={item.id}
                 id={item.id} 
                 name={item.title}
                 quantity={item.quantity}
-            />)
+            />:null)
             }
           </List>
       </MainContent>

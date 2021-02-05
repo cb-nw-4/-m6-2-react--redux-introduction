@@ -1,20 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {removeItem} from "../actions";
+import {removeItem, updateQuantity} from "../actions";
+
 
 const CartItem = ({id, name,quantity}) =>{
     const dispatch = useDispatch();
+    const [currentQty, setQty] = useState(quantity);
 
     return <Wrapper>
         <Product>
             <div>{name}</div>
             <Close onClick={()=>dispatch(removeItem({id}))}>x</Close>
         </Product>
-        <QuantityBox><div>Quantity: </div><Quantity>{quantity}</Quantity></QuantityBox>
+        <QuantityBox>
+            <div>Quantity: </div>
+            <Quantity 
+                type='text' 
+                value={quantity} 
+                onInput={(ev)=>{
+                        dispatch(updateQuantity(id, parseInt(ev.target.value)));
+                    console.log(ev.target.value);
+                }}
+                />
+        </QuantityBox>
     </Wrapper>
 };
-const Quantity=styled.div`
+const Quantity=styled.input`
     width: 33px;
     border-bottom: 3px solid white;
     text-align:center;
@@ -22,6 +34,7 @@ const Quantity=styled.div`
     font-weight: bold;
     margin: 0 5px;
     padding:0;
+    background-color: transparent;
 `;
 const QuantityBox = styled.div`
     font-size: 18px;
