@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const CartItem = () =>{
+const CartItem = ({name,quantity}) =>{
     return <Wrapper>
-        <Product><div>Happy Corgis</div><Close>x</Close></Product>
-        <QuantityBox><div>Quantity: </div><Quantity>1</Quantity></QuantityBox>
+        <Product><div>{name}</div><Close>x</Close></Product>
+        <QuantityBox><div>Quantity: </div><Quantity>{quantity}</Quantity></QuantityBox>
     </Wrapper>
-
 };
-
 const Quantity=styled.div`
     width: 33px;
     border-bottom: 3px solid white;

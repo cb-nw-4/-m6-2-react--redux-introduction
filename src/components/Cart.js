@@ -1,30 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 
 import Button from './Button';
 import CartItem from './CartItem';
+import {getStoreItemArray} from '../reducers/index';
 
 const Cart = () => {
+    const storeItems = useSelector(getStoreItemArray);
+    let total=0;
+    storeItems.map((item)=>total+=item.quantity*item.price);
+    let formatedPrice=new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(total / 100);
+
   return <Wrapper>
       <MainContent>
           <CartTitle>Your Cart</CartTitle>
           <NumItems>0 items</NumItems>
           <List>
-              <CartItem/>
-              <CartItem/>
+            {
+            storeItems.map((item)=> item.quantity === 0? null:
+            <CartItem 
+                key={item.id} 
+                name={item.title}
+                quantity={item.quantity}
+            />)
+            }
           </List>
       </MainContent>
       <PurchasingSection>
-          <Total>Total: <b>$120.00</b></Total>
+          <Total>Total: {total>0? <b>{formatedPrice}</b>: <b>$0.00</b>}</Total>
           <PurchaseButton>Purchase</PurchaseButton>
       </PurchasingSection>
       </Wrapper>;
 };
 
 const List=styled.ul`
-    margin:30px 0px;
-    padding:0px;
+    margin-top:30px;
+    padding:0px 20px;
     width: 100%;
+    max-height:calc(100vh - 300px);
+    overflow: auto;
 
 `;
 const PurchaseButton = styled(Button)`
@@ -41,13 +59,15 @@ const PurchasingSection=styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    position: sticky;
 `;
 const NumItems = styled.div`
     font-size: 16px;
     padding-top: 10px;
+    padding-left: 30px;
 `;
 const MainContent = styled.div`
-    padding: 30px 32px;
+    padding: 30px 0px;
 `;
 const Wrapper = styled.div`
     position: sticky;
@@ -68,6 +88,7 @@ const CartTitle = styled.div`
     font-size: 24px;
     font-weight:bold;
     margin:0;
+    padding-left: 30px;
 `;
 
 
