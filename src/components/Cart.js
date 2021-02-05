@@ -23,7 +23,8 @@ const Cart = () => {
             {
             storeItems.map((item)=> item.quantity === 0? null:
             <CartItem 
-                key={item.id} 
+                key={item.id}
+                id={item.id} 
                 name={item.title}
                 quantity={item.quantity}
             />)

@@ -7,6 +7,8 @@ STORE_ITEMS.map(
 
 const initialState = {};//tempObject;
 
+
+
 export default function cartReducer(state = initialState, action) {
     switch(action.type){
         case 'ADD_ITEM':
@@ -17,6 +19,13 @@ export default function cartReducer(state = initialState, action) {
                     quantity:1 ,
                 }
             }
+        case 'REMOVE_ITEM':
+            {
+                const stateCopy = { ...state };
+                delete stateCopy[action.item.id];
+                return stateCopy;
+            }
+            
         default:
             return state;
     }
