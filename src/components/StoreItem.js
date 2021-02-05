@@ -1,9 +1,13 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
+import { AddItem } from "../actions";
 import styled, { keyframes }  from 'styled-components';
-
 import Button from './Button';
 
+
 const StoreItem = ({ id, title, src, price }) => {
+  const dispatch = useDispatch();
+  
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -17,7 +21,7 @@ const StoreItem = ({ id, title, src, price }) => {
         </ImageBox>
       </ImageWrapper>
       <Title>{title}</Title>
-      <Button>Add to Cart — {formattedPrice}</Button>
+      <Button onClick={() => dispatch(AddItem({id, title, price}))}>Add to Cart — {formattedPrice}</Button>
     </Wrapper>
   );
 };

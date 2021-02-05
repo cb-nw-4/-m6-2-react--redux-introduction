@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { getStoreItemArray } from "../reducers/index";
 import styled from 'styled-components';
 import CartItem from "./CartItem";
 import Button from './Button';
 
 const Cart = () => {
-
+    const state = useSelector(state=>state)
+    console.log(state)
+    const storeItems = useSelector(getStoreItemArray);
+    //console.log(storeItems)
+    let okay = storeItems.find((item) => typeof item === "number")
+    //console.log(okay)
+    
+ 
     return (
         <CartPanel>
             <CartText>
                 <TopText>
                 <h2>Your Cart</h2>
-                <p>0 Items</p>
+                <p>{storeItems.length ? storeItems.length - 1 : 0} Items</p>
                 </TopText>
-                <CartItem />
+                {storeItems.map((item) => {
+                    if(typeof item !== "number") {
+                        return <CartItem key={item.id} item={item}/>
+                    }
+                })}
             </CartText>
             <PurchaseSection>
-                <TotalText>Total:</TotalText>
+                <TotalText>Total: <span>$ {okay? (okay/100).toFixed(2) : 0}</span></TotalText>
                 <PurchaseButton>Purchase</PurchaseButton>
             </PurchaseSection>
         </CartPanel>
@@ -63,6 +76,9 @@ const PurchaseSection = styled.div`
 
 const TotalText = styled.p`
     font-size: 22px;
+    & span {
+        font-weight: bold;
+    }
 `;
 
 const PurchaseButton = styled(Button)`

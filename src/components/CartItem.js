@@ -1,18 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { ChangeQuantity, RemoveItem } from "../actions";
 import styled from 'styled-components';
 import UnstyledButton from './UnstyledButton';
 
-const CartItem = () => {
-
+const CartItem = ({ item }) => {
+    const dispatch = useDispatch();
+ 
     return(
         <ItemPanel>
             <ItemSelected>
-                <ItemName>Name</ItemName>
-                <RemoveButton>✕</RemoveButton>
+                <ItemName>{item.title}</ItemName>
+                <RemoveButton onClick={() => dispatch(RemoveItem(item))}>✕</RemoveButton>
             </ItemSelected>
             <QuantityBox>
                 <p>Quantity: </p>
-                <input></input>
+                <input value={item.quantity}  onChange={(event) => dispatch(ChangeQuantity(event.target.value, item))}/>
             </QuantityBox>
         </ItemPanel>
     )
