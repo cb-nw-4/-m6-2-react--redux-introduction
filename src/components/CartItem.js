@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {removeItem, updateQuantity} from "../actions";
+import {removeItem, updateQuantity} from "../action";
 
 const CartItem = ({id, name,quantity}) =>{
     const dispatch = useDispatch();

@@ -1,4 +1,3 @@
-const initialState ={};
 import { STORE_ITEMS } from "../data";
 
 //Create initial state

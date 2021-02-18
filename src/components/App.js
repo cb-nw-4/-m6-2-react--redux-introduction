@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Cart from './Cart';
 import Logo from './Logo';
 import ItemGrid from './ItemGrid';
 import GlobalStyles from './GlobalStyles';
@@ -23,6 +23,7 @@ const App = () => {
 };
 
 const Wrapper = styled.div`
+  width:100%;
   position: relative;
   display: grid;
   grid-template-areas: "header header header sidebar"

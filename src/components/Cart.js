@@ -7,6 +7,7 @@ import { getStoreItemArray } from "../reducers/index";
 
 const Cart = () => {
   const storeItems = useSelector(getStoreItemArray);
+  const totalItems = storeItems.length
   let total = 0;
   storeItems.map((item) => (total += item.quantity * item.price));
   let formatedPrice = new Intl.NumberFormat("en-US", {
@@ -18,7 +19,7 @@ const Cart = () => {
     <Wrapper>
       <MainContent>
         <CartTitle>Your Cart</CartTitle>
-        <NumItems>0 items</NumItems>
+        <NumItems onchange={()=>storeItems}>{totalItems} Items</NumItems>
         <List>
         {
             storeItems.map((item)=> item.quantity&&item.quantity>0?
