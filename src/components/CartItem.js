@@ -5,7 +5,7 @@ import {removeItem, updateQuantity} from "../action";
 
 const CartItem = ({id, name,quantity}) =>{
     const dispatch = useDispatch();
-    const [currentQty, setQty] = useState(quantity);
+    const [currentQty, setCurrentQty] = useState(quantity);
     return <Wrapper>
         <Product>
             <div>{name}</div>
